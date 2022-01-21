@@ -63,7 +63,7 @@
                         <!-- Login Block -->
                         <div class="block push-bit">
                             <!-- Login Form -->
-                            <form action="{% url 'login' %}" method="post" id="form-login" class="form-horizontal">
+                            <form action="{% url 'login' %}" method="post" id="form-login" class="form-horizontal {% if not checkLogin %}display-none{% endif %}">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <div class="col-xs-12">
@@ -82,11 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group form-actions">
-                                    <div class="col-xs-6">
-                                        {% for message in messages %}
-                                            <p style="color: red;">{{message}}</p>
-                                        {% endfor %}
-                                    </div>
+                                    
                                     <div class="col-xs-6 text-right">
                                         <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
                                     </div>
@@ -99,7 +95,7 @@
                             </form>
                             <!-- END Login Form -->
                             <!-- Register Form -->
-                            <form action="{% url 'addUser' %}" method="post" id="form-register" class="form-horizontal display-none">
+                            <form action="{% url 'addUser' %}" method="post" id="form-register" class="form-horizontal {% if checkLogin %}display-none{% endif %}">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <div class="col-xs-12">
@@ -135,6 +131,10 @@
                                 </div>
                                 <div class="form-group form-actions">
                                     <div class="col-xs-6">
+                                        {% for message in messages %}
+                                            <p style="color: red;font-weight: bold;">{{message}}</p>
+                                        {% endfor %}
+                                        
                                     </div>
                                     <div class="col-xs-6 text-right">
                                         <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Register Account</button>

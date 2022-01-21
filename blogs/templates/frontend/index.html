@@ -39,8 +39,11 @@
             <nav aria-label="Page navigation">
                 {% if blogs.paginator.num_pages > 1  %}
                     <ul class="pagination justify-content-center">
+                        {% if blogs.number != 1 %}
+                        <li class="page-item"><a class="page-link" href="?page=1" ><<</a></li>
+                        {% endif %}
                         {% if blogs.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{blogs.previous_page_number}}" ><<</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{blogs.previous_page_number}}" ><</a></li>
                         {% endif %}
                             
                         {% for page_number in blogs.paginator.page_range %}
@@ -49,7 +52,10 @@
                             
                         {% endfor %}
                         {% if blogs.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{blogs.next_page_number}}">>></a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{blogs.next_page_number}}">></a></li>
+                        {% endif %}
+                        {% if blogs.number != blogs.paginator.num_pages %}
+                        <li class="page-item"><a class="page-link" href="?page={{blogs.paginator.num_pages}}">>></a></li>
                         {% endif %}
                     </ul>
                 {% endif %}
